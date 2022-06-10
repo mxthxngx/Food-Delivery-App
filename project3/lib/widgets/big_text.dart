@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 
+import '../utils/dimensions.dart';
+
 class BigText extends StatelessWidget {
   Color? color;//optional color
   final String text;
@@ -21,7 +23,7 @@ class BigText extends StatelessWidget {
         color: color,
         fontWeight: FontWeight.w500,
         fontFamily: "Roboto",
-        fontSize: size,
+        fontSize: Dimensions.font20,
       ),
     );
   }
