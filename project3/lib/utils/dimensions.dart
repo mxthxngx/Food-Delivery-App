@@ -9,6 +9,14 @@ static double pageView = screenHeight/2.64;
 static double height10 = screenHeight/84.4;
 static double height20 = screenHeight/42.2;
 static double height15 = screenHeight/56.27;
-static double font20 =screenHeight/42.2;
+static double height30 = screenHeight/23.135;
 
+static double font20 =screenHeight/42.2;
+static double radius20 = screenHeight/42.2;
+static double radius30 = screenHeight/28.13;
+static double width10 = screenHeight/84.4;
+static double width20 = screenHeight/42.2;
+static double width15 = screenHeight/56.27;
+static double width40 = screenHeight/21.1;
+static double iconSize24= screenHeight/35.17;
 }

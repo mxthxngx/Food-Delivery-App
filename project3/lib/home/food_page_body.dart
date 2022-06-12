@@ -37,6 +37,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //Slider section
+
          Container(
         height: Dimensions.pageView,
         child: PageView.builder(
@@ -56,6 +58,26 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         activeSize: const Size(18.0, 9.0),
         activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
+        ),
+        SizedBox(height: Dimensions.height30,),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.height30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: "Popular"),
+              SizedBox(width:Dimensions.width10),
+              Container(
+                margin: const EdgeInsets.only(bottom: 3),
+                child: BigText(text: ".",color:Colors.black26),
+
+              ),
+              SizedBox(width: Dimensions.width10,),
+              Container(
+                child: SmallText(text: "Food pairing",color: Colors.black26)
+              )
+            ],
+          )
         ),
       ],
     );
@@ -92,9 +114,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     child: Stack(
       children: [Container(
       height: Dimensions.pageViewContainer,
-      margin: const EdgeInsets.only(left: 15,right: 15),
+      margin:  EdgeInsets.only(left: Dimensions.width15,right: Dimensions.width10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(Dimensions.radius30),
           color: index.isEven?const Color(0xFF69c5df): const Color(0XFF9294cc),
           image: const DecorationImage(
               fit: BoxFit.cover,
@@ -108,9 +130,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: Dimensions.pageViewTextContainer,
-            margin: const EdgeInsets.only(left: 40,right: 40,bottom: 25),
+            margin:  EdgeInsets.only(left: Dimensions.width40,right: Dimensions.width40,bottom: 25),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Colors.white,
                 boxShadow:  [
                   BoxShadow(color: Colors.grey.shade300,
@@ -127,7 +149,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
             ),
           child: Container(
-            padding:  EdgeInsets.only(top: 10,left: Dimensions.height15,right: 15),
+            padding:  EdgeInsets.only(top: Dimensions.height15,left: Dimensions.width15 ,right: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
