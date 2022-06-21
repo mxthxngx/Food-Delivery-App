@@ -5,8 +5,9 @@ import 'package:project3/widgets/icon_and_text.dart';
 import 'package:project3/widgets/small_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
+import '../../utils/colors.dart';
+import '../../utils/dimensions.dart';
+
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -79,6 +80,77 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           )
         ),
+
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context,index){
+              return Container(
+                margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20),
+                child: Row(
+                  children: [
+                    //Image section
+                    Container(
+                      width: Dimensions.listViewImgSize,
+                      height: Dimensions.listViewImgSize,
+                      margin: EdgeInsets.only(bottom: Dimensions.width10),
+
+                    decoration:BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.radius20),
+                        color: Colors.grey,
+                        image:DecorationImage(
+                          fit: BoxFit.cover,
+                            image:AssetImage(
+                                "assets/images/icecream.jpg"
+                            )
+                        )
+                    ),),
+                    // Text section
+                    Expanded(
+                      child: Container(
+                        height: Dimensions.listViewImgSize,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(Dimensions.radius20),
+                            bottomRight: Radius.circular(Dimensions.radius20),
+                          ),
+                          color: Colors.grey[100],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(text: "Vegan Ice-Cream Chocolate"),
+                              SizedBox(height: Dimensions.height10,),
+                              SmallText(text: "With chocolate sauce",),
+                              SizedBox(height: Dimensions.height10,),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                                children: [
+                                  IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
+                                  IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: AppColors.mainColor),
+                                  IconAndText(icon: Icons.access_time, text: "1.75km", iconColor: Colors.red),
+
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+
+            },
+          ),
+
+
       ],
     );
   }
@@ -173,9 +245,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                   children: [
-                    const IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
+                     IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
                     IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: AppColors.mainColor),
-                    const IconAndText(icon: Icons.lock_clock_outlined, text: "1.75km", iconColor: Colors.red),
+                     IconAndText(icon: Icons.access_time, text: "1.75km", iconColor: Colors.red),
 
                   ],
                 )
