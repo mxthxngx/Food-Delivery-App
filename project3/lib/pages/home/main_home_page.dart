@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project3/home/food_page_body.dart';
+import 'package:project3/pages/home/food_page_body.dart';
 import 'package:project3/utils/dimensions.dart';
 import 'package:project3/widgets/big_text.dart';
 import 'package:project3/widgets/small_text.dart';
 
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
 class  MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
@@ -50,7 +50,9 @@ class _MainFoodPageState extends State<MainFoodPage> {
             ],
           ),
         ),),
-          FoodPageBody(),
+         Expanded(child: SingleChildScrollView(
+           child: FoodPageBody()
+         ),),
         ],
       ));
   }
