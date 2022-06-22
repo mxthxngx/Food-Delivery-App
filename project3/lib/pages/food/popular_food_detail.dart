@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project3/utils/dimensions.dart';
 import 'package:project3/widgets/app_icon.dart';
+import 'package:project3/widgets/expandable_text_widget.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/app_column.dart';
@@ -17,6 +18,7 @@ class PopularFoodDetails extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          //background image
           Positioned(
             left: 0,
               right: 0,
@@ -33,6 +35,7 @@ class PopularFoodDetails extends StatelessWidget {
               ),
             ),
           ),
+          // icon widgets
           Positioned(
             top: Dimensions.height15*3,
             left: Dimensions.width20,
@@ -45,6 +48,7 @@ class PopularFoodDetails extends StatelessWidget {
               ],
             ),
           ),
+          //introduction of food
           Positioned(
               left: 0,
               right: 0,
@@ -53,8 +57,8 @@ class PopularFoodDetails extends StatelessWidget {
                 padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height15*3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(Dimensions.radius20),
-                    topLeft: Radius.circular(Dimensions.radius20),
+                      topRight: Radius.circular(Dimensions.radius20*1.5),
+                    topLeft: Radius.circular(Dimensions.radius20*1.5),
                   ),
                     color: Colors.white,
                 ),
@@ -64,11 +68,14 @@ class PopularFoodDetails extends StatelessWidget {
                     AppColumn(text: "Ice cream"),
                     SizedBox(height: Dimensions.height20,),
                     BigText(text: "Introduction"),
-                  ],
+
+                        ExpandableTextWidget(text: "This Chocolate Ice Cream recipe starts with a cooked chocolate custard, made from a mixture of cocoa powder, semi sweet chocolate, half-and-half cream, sugar, egg yolks, and vanilla. Now, each ingredient contributes to the ice cream's rich flavor and silky smooth texture. The rich chocolate flavor comes from adding both unsweetened cocoa powder (you can use regular unsweetened or Dutch-processed) and semi sweet (or bittersweet) chocolate. The half-and-half cream (you can use 1 cup (240 ml) cream and 1 cup (240 ml) milk) contributes to the ice cream's rich and creamy flavor and, of course, the sugar provides the sweetness.",) ,
+                    ],
                 ),
                 ),
 
           )
+
         ],
       ),
       bottomNavigationBar: Container(
@@ -77,8 +84,8 @@ class PopularFoodDetails extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.grey[200],
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Dimensions.radius20*2),
-              topRight: Radius.circular(Dimensions.radius20*2),
+              topLeft: Radius.circular(Dimensions.radius20),
+              topRight: Radius.circular(Dimensions.radius20),
 
             ),
 
