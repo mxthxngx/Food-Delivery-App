@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project3/controllers/popular_product_controller.dart';
+import 'package:project3/models/products_model.dart';
+import 'package:project3/utils/constants.dart';
 import 'package:project3/widgets/big_text.dart';
 import 'package:project3/widgets/icon_and_text.dart';
 import 'package:project3/widgets/small_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
+import '../../controllers/recommended_product_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 
@@ -39,52 +44,62 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         //Slider section
+        GetBuilder<PopularProductController>(builder: (popularProducts){
+          return  popularProducts.isLoaded?Container(
+              height: Dimensions.pageView,
+              child: PageView.builder(
+                  controller: pageController,
+                  itemCount: popularProducts.popularProductList.length,
+                  itemBuilder: (context,position)
+                  {
+                    return _buildPageItem(position,popularProducts.popularProductList[position]);
+                  })
+          ):CircularProgressIndicator(color: AppColors.mainColor,);
 
-         Container(
-        height: Dimensions.pageView,
-        child: PageView.builder(
-            controller: pageController,
-            itemCount: 5,
-            itemBuilder: (context,position)
-            {
-              return _buildPageItem(position);
-            })
-    ),
-        new DotsIndicator(
-        dotsCount: 5,
-        position: _currPageValue,
-        decorator: DotsDecorator(
-          activeColor: AppColors.mainColor,
+        }),
+    GetBuilder<PopularProductController>(builder: (popularProducts) {
+    return  new DotsIndicator(
+      dotsCount: popularProducts.popularProductList.length<=0?1:popularProducts.popularProductList.length,
+      position: _currPageValue,
+      decorator: DotsDecorator(
+        activeColor: AppColors.mainColor,
         size: const Size.square(9.0),
         activeSize: const Size(18.0, 9.0),
         activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-        ),
-        ),
+      ),
+    );
+    }
+    ),
+
+    //DOTS
+
         SizedBox(height: Dimensions.height30,),
+        //LIST OF FOOD
         Container(
-          margin: EdgeInsets.only(left: Dimensions.height30),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              BigText(text: "Popular"),
-              SizedBox(width:Dimensions.width10),
-              Container(
-                margin: const EdgeInsets.only(bottom: 3),
-                child: BigText(text: ".",color:Colors.black26),
+            margin: EdgeInsets.only(left: Dimensions.height30),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                BigText(text: "Recommended"),
+                SizedBox(width:Dimensions.width10),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 3),
+                  child: BigText(text: ".",color:Colors.black26),
 
-              ),
-              SizedBox(width: Dimensions.width10,),
-              Container(
-                child: SmallText(text: "Food pairing",color: Colors.black26)
-              )
-            ],
-          )
+                ),
+                SizedBox(width: Dimensions.width10,),
+                Container(
+                    child: SmallText(text: "Food pairing",color: Colors.black26)
+                )
+              ],
+            )
         ),
-
-          ListView.builder(
+        GetBuilder<RecommendedProductController>(builder: (recommendedProduct)
+        {
+          return recommendedProduct.isLoaded? ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: recommendedProduct.recommendedProductList.length,
             itemBuilder: (context,index){
               return Container(
                 margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20),
@@ -96,16 +111,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       height: Dimensions.listViewImgSize,
                       margin: EdgeInsets.only(bottom: Dimensions.width10),
 
-                    decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.grey,
-                        image:DecorationImage(
-                          fit: BoxFit.cover,
-                            image:AssetImage(
-                                "assets/images/icecream.jpg"
-                            )
-                        )
-                    ),),
+                      decoration:BoxDecoration(
+                          borderRadius: BorderRadius.circular(Dimensions.radius20),
+                          color: Colors.grey,
+                          image:DecorationImage(
+                              fit: BoxFit.cover,
+                              image:NetworkImage(
+                                  AppConstants.BASE_URl+ AppConstants.UPLOAD+recommendedProduct.recommendedProductList[index].img!
+
+                              )
+                          )
+                      ),),
                     // Text section
                     Expanded(
                       child: Container(
@@ -123,7 +139,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              BigText(text: "Vegan Ice-Cream Chocolate"),
+                              BigText(text: recommendedProduct.recommendedProductList[index].name!),
                               SizedBox(height: Dimensions.height10,),
                               SmallText(text: "With chocolate sauce",),
                               SizedBox(height: Dimensions.height10,),
@@ -148,13 +164,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               );
 
             },
-          ),
+          ):CircularProgressIndicator(color: AppColors.mainColor,);
+        }),
 
-
-      ],
+         ],
     );
   }
-  Widget _buildPageItem(int index)
+  Widget _buildPageItem(int index,ProductModel popularProduct)
   {
     Matrix4 matrix = new Matrix4.identity();
     if(index == _currPageValue.floor())
@@ -190,10 +206,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius30),
           color: index.isEven?const Color(0xFF69c5df): const Color(0XFF9294cc),
-          image: const DecorationImage(
+          image:  DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(
-                  "assets/images/noodles.jpg"
+              image: NetworkImage(
+                AppConstants.BASE_URl+  AppConstants.UPLOAD+popularProduct.img!
               )
           )
       ),
@@ -225,7 +241,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BigText(text: "Noodles",color: Colors.black,),
+                BigText(text: popularProduct.name!,color: Colors.black,),
                  SizedBox(height:Dimensions.height10,),
                 Row(
                   children: [
