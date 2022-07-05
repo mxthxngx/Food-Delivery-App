@@ -6,7 +6,6 @@ import 'package:project3/utils/constants.dart';
 class RecommendedProductRepo extends GetxService{
   final ApiClient apiClient;
   RecommendedProductRepo({required this.apiClient});
-
   //future has type async
   Future<Response> getRecommendedProductList() async{
     return await apiClient.getData(AppConstants.RECOMMENDED_PRODUCT);

@@ -1,36 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:project3/controllers/recommended_product_controller.dart';
+import 'package:project3/routes/route_helper.dart';
 import 'package:project3/widgets/expandable_text_widget.dart';
 import 'package:project3/widgets/small_text.dart';
 
 import '../../utils/colors.dart';
+import '../../utils/constants.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/big_text.dart';
 
-class RecommendedFoodDetail extends StatefulWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+class RecommendedFoodDetail extends StatelessWidget {
+   int pageId;
 
-  @override
-  State<RecommendedFoodDetail> createState() => _RecommendedFoodDetailState();
-}
+   RecommendedFoodDetail({Key? key,required this.pageId}) : super(key: key);
 
-class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
+
   @override
   Widget build(BuildContext context) {
+
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
 
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             elevation: 0,
 
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                    onTap:(){
+                      Get.toNamed(RouteHelper.getInitial());
+      },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
@@ -40,7 +50,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
               color: Colors.grey[40],
               child:Center(
                 child:
-                BigText(color:Colors.black,text:"Burger", size: Dimensions.font26/1.2,),),
+                BigText(color:Colors.black,text:product.name!, size: Dimensions.font26/1.2,),),
               width: double.maxFinite,
 
               padding: EdgeInsets.only(top: Dimensions.height10/2,bottom: Dimensions.height10),
@@ -56,7 +66,9 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
             backgroundColor: Colors.amberAccent[100],
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(("assets/images/burger.jpg"),
+              background: Image.network(
+                  AppConstants.BASE_URl+AppConstants.UPLOAD+product.img!
+                  ,
                   width: double.maxFinite,
                   fit: BoxFit.cover),
             ),
@@ -66,7 +78,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget( text: "Hamburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes caller, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef, sometimes called hamburg steak, Salisbury steak, or Vienna steak, (2)amburger, also called burger, ground beef. The term is applied variously to (1) a patty of ground beef,"),
+                  child: ExpandableTextWidget( text: product.description),
             margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
 
           ),
@@ -90,7 +102,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(iconSize:Dimensions.iconSize24, iconColor: Colors.white,backgroundColor: AppColors.mainColor,icon: Icons.remove),
-                BigText(text: "\$5"+" X "+"0"),
+                BigText(text: "\$ ${product.price!}"+" X "+"0"),
                 AppIcon(iconSize:Dimensions.iconSize24, iconColor: Colors.white,backgroundColor: AppColors.mainColor,icon: Icons.add)],
             ),
           ),
@@ -144,4 +156,5 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
       ),
     );
   }
+
 }

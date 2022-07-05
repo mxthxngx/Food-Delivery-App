@@ -1,5 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:project3/controllers/cart_controller.dart';
+import 'package:project3/controllers/popular_product_controller.dart';
+import 'package:project3/pages/home/main_home_page.dart';
+import 'package:project3/routes/route_helper.dart';
+import 'package:project3/utils/constants.dart';
 import 'package:project3/utils/dimensions.dart';
 import 'package:project3/widgets/app_icon.dart';
 import 'package:project3/widgets/expandable_text_widget.dart';
@@ -11,10 +18,14 @@ import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_text.dart';
 
 class PopularFoodDetails extends StatelessWidget {
-  const PopularFoodDetails({Key? key}) : super(key: key);
+  int pageId;
+   PopularFoodDetails({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>().initProduct(Get.find<CartController>());
+
     return Scaffold(
       body: Stack(
         children: [
@@ -28,8 +39,8 @@ class PopularFoodDetails extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    "assets/images/icecream.jpg"
+                  image: NetworkImage(
+                    AppConstants.BASE_URl+AppConstants.UPLOAD+product.img!
                   ),
                 ),
               ),
@@ -43,9 +54,14 @@ class PopularFoodDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
-                AppIcon(icon: Icons.shopping_cart_outlined)
-              ],
+
+                GestureDetector(
+            onTap: ()
+               {
+                 Get.toNamed(RouteHelper.initial);
+               },
+               child: AppIcon(icon: Icons.arrow_back_ios),
+          ),AppIcon(icon: Icons.shopping_cart_outlined)]
             ),
           ),
           //introduction of food
@@ -65,11 +81,11 @@ class PopularFoodDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(text: "Ice cream"),
+                    AppColumn(text: product.name!),
                     SizedBox(height: Dimensions.height20,),
                     BigText(text: "Introduction"),
 
-                        ExpandableTextWidget(text: "This Chocolate Ice Cream recipe starts with a cooked chocolate custard, made from a mixture of cocoa powder, semi sweet chocolate, half-and-half cream, sugar, egg yolks, and vanilla. Now, each ingredient contributes to the ice cream's rich flavor and silky smooth texture. The rich chocolate flavor comes from adding both unsweetened cocoa powder (you can use regular unsweetened or Dutch-processed) and semi sweet (or bittersweet) chocolate. The half-and-half cream (you can use 1 cup (240 ml) cream and 1 cup (240 ml) milk) contributes to the ice cream's rich and creamy flavor and, of course, the sugar provides the sweetness.",) ,
+                        ExpandableTextWidget(text: product.description!,) ,
                     ],
                 ),
                 ),
@@ -78,22 +94,24 @@ class PopularFoodDetails extends StatelessWidget {
 
         ],
       ),
-      bottomNavigationBar: Container(
-        height: Dimensions.height20*6,
-          padding: EdgeInsets.only(top: Dimensions.height30,bottom: Dimensions.height20,left: Dimensions.width20, right: Dimensions.width20),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Dimensions.radius20),
-              topRight: Radius.circular(Dimensions.radius20),
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct) //getbuilder creates an instance of product controller so we can use its functions
+        {
+          return Container(
+            height: Dimensions.height20*6,
+            padding: EdgeInsets.only(top: Dimensions.height30,bottom: Dimensions.height20,left: Dimensions.width20, right: Dimensions.width20),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.radius20),
+                topRight: Radius.circular(Dimensions.radius20),
+
+              ),
 
             ),
+            child: Row(
+              mainAxisAlignment:MainAxisAlignment.spaceBetween,
 
-          ),
-          child: Row(
-            mainAxisAlignment:MainAxisAlignment.spaceBetween,
-
-            children: [
+              children: [
                 Container(
                   height: Dimensions.height30*3,
                   padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20, bottom: Dimensions.height20),
@@ -102,30 +120,43 @@ class PopularFoodDetails extends StatelessWidget {
                     color: Colors.white,
                   ),
                   child: Row(
-                   children:[
-                     Icon(Icons.remove,color: Colors.black45,),
-                     SizedBox(width: Dimensions.width10/2,),
-                     BigText(text: "0"),
-                     SizedBox(width: Dimensions.width10/2,),
+                      children:[
+                        GestureDetector(
+                            onTap:(){
+                              popularProduct.setQuantity(false);
+            },
+                            child: Icon(Icons.remove,color: Colors.black45,)),
+                        SizedBox(width: Dimensions.width10/2,),
+                        BigText(text: popularProduct.quantity.toString()),
+                        SizedBox(width: Dimensions.width10/2,),
 
-                     Icon(Icons.add,color: Colors.black45,)
-      ]
+                        GestureDetector(
+                            onTap:(){
+                              popularProduct.setQuantity(true);
+                            },
+                            child: Icon(Icons.add,color: Colors.black45,))
+                      ]
                   ),
                 ),
                 Container(
                   height: Dimensions.height30*3,
-                    padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20, bottom: Dimensions.height20),
+                  padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20, bottom: Dimensions.height20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: AppColors.mainColor,
                   ),
-                  child: BigText(text: "\$10 | Add to cart", color: Colors.white,),
+                  child: GestureDetector(
+                      onTap: (){
+                        popularProduct.addItem(product);
+                      }
+                      ,child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white,)),
 
-                  ),
+                ),
 
               ],
-          ),
-      ),
+            ),
+          );
+        },)
     );
   }
 }
