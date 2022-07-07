@@ -37,6 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -85,6 +86,27 @@ flutter:
            weight: 700
          - asset: assets/fonts/Roboto-Black.ttf
            weight: 900
+
+     - family: Lato
+       fonts:
+             - asset: assets/fonts/Lato/Lato-Regular.ttf
+               weight: 400
+     - family: Gentium Book Plus
+       fonts:
+             - asset: assets/fonts/Gentium_Book_Plus/GentiumBookPlus-Bold.ttf
+               weight: 700
+     - family: San Francisco
+       fonts:
+             - asset: assets/fonts/SF-Pro-Display-Regular.otf
+               weight: 600
+             - asset: assets/fonts/SF-Pro-Text-Regular.otf
+               weight: 200
+     - family: Turis
+       fonts:
+         - asset: assets/fonts/Turis-ExtraBold.otf
+           weight: 600
+         - asset: assets/fonts/Turis-ExtraBold.otf
+           weight: 300
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
