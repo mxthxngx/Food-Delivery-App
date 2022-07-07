@@ -5,6 +5,7 @@ import 'package:project3/controllers/cart_controller.dart';
 import 'package:project3/data/repository/popular_product_repo.dart';
 import 'package:project3/utils/colors.dart';
 
+import '../models/cart_model.dart';
 import '../models/products_model.dart';
 
 class PopularProductController extends GetxController
@@ -50,12 +51,17 @@ class PopularProductController extends GetxController
     update();
   }
   int checkQuantity(int quantity){
-    if(quantity<0){
+    if((_inCartItems+quantity)<0){
       Get.snackbar("Item Count", "You can't reduce more",
       backgroundColor: AppColors.mainColor);
+      if(_inCartItems>0)
+        {
+          _quantity = _inCartItems;
+          return _quantity;
+        }
       return 0;
     }
-    if(quantity>20)
+    else if(_inCartItems+quantity>20)
   {
     Get.snackbar("Item Count", "You can't increase more",
         backgroundColor: AppColors.mainColor);
@@ -65,20 +71,45 @@ class PopularProductController extends GetxController
       return quantity;
     }
   }
-  void initProduct(CartController cart){
+  void initProduct(ProductModel product,CartController cart){
     _quantity = 0;
     _cart = cart;
     _inCartItems = 0;
+    var exist = false;
+    exist = _cart.existInCart(product);
+    print(exist.toString());
+    if(exist){
+      _inCartItems = _cart.getQuantity(product);
+    }
+    print("quantity in cart is "+_inCartItems.toString() );
     //if exists
     //get from storage
   }
 
-  void addItem(ProductModel product){
-     if(_quantity>0) _cart.addItem(product, _quantity);
-     else{
+  void addItem(ProductModel product) {
+   // if (_quantity > 0)
+      {_cart.addItem(product, _quantity);
+      _quantity =0;
+      _inCartItems=_cart.getQuantity(product);
+      _cart.items.forEach((key, value) {
+      print("The id is" + value.id.toString() + "The quantity is " +
+          value.quantity.toString());
+      Get.snackbar("Item Count", "Item added",
+          colorText: AppColors.mainBlackColor,
+          backgroundColor:Color(0xff8AFF8A),
+      );
+    });
+  /*}else{
        Get.snackbar("Item Count", "Add atleast one item in the cart!",
            backgroundColor: AppColors.mainColor);
-
+*/
      }
+     update();
+  }
+  int get totalItems{
+    return _cart.totalItems;
+  }
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 }

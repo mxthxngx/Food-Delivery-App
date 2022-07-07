@@ -4,4 +4,5 @@ class AppColors{
   static final Color mainColor = const Color(0xFF0051FF  );//FF89dad0
   static final Color iconColor1 = const Color(0XFFffd28d);
   static final Color mainBlackColor = const Color(0xFF332d2b);
+  static final Color mainGreen = const Color(0xF8AFF8A);
 }
