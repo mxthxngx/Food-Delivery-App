@@ -40,6 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   void dispose(){
     pageController.dispose();
+    super.dispose();
   }//to make the page controller stop working once we leave the page
   @override
   Widget build(BuildContext context) {

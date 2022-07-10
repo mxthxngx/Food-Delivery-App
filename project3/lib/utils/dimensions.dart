@@ -28,4 +28,5 @@ static double listViewTextConstSize = screenWidth/3.9;
 static double popularFoodImgSize = screenHeight/2.1;
 
 static double iconSize16 = screenHeight/52.75;
+static double splashImg = 2*screenHeight/(3.6);
 }
