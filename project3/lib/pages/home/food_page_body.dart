@@ -40,6 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   void dispose(){
     pageController.dispose();
+    super.dispose();
   }//to make the page controller stop working once we leave the page
   @override
   Widget build(BuildContext context) {
@@ -108,7 +109,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             itemBuilder: (context,index){
               return GestureDetector(
                 onTap: (){
-                  Get.toNamed(RouteHelper.getRecommendedFood(index));
+                  Get.toNamed(RouteHelper.getRecommendedFood(index,"home"));
                 },
                 child: Container(
                   margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20),
@@ -213,7 +214,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         GestureDetector(
           onTap: (){
-            Get.toNamed(RouteHelper.getPopularFood(index));
+            Get.toNamed(RouteHelper.getPopularFood(index,"home"));
           },
           child: Container(
 

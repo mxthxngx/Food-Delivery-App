@@ -21,7 +21,8 @@ class CartController extends GetxController{
             img: value.img,
             quantity: value.quantity!+quantity,
             isExist: true,
-            time: DateTime.now().toString()
+            time: DateTime.now().toString(),
+          product: product,
       );
       }
       );
@@ -34,7 +35,7 @@ class CartController extends GetxController{
 
     if(quantity>0){
     _items.putIfAbsent(product.id!, () {
-      print("Adding item to cart" + product.id!.toString() + "\t"+quantity.toString());
+      //print("Adding item to cart" + product.id!.toString() + "\t"+quantity.toString());
 
       return CartModel(
 
@@ -44,18 +45,20 @@ class CartController extends GetxController{
           img: product.img,
           quantity: quantity,
           isExist: true,
-          time: DateTime.now().toString()
+          time: DateTime.now().toString(),
+        product: product,
       );
     }
     );
 
-    print("Length of item is ${_items.length}");}
+    //print("Length of item is ${_items.length}");
+    }
     else{
       Get.snackbar("Item Count", "Add atleast one item in the cart!",
           backgroundColor: AppColors.mainColor);
     }
     }
-
+update();
 
   }
 
@@ -94,4 +97,13 @@ class CartController extends GetxController{
       return e.value;
     }).toList();
   }
+
+  int get totalAmount{
+    var total = 0;
+    _items.forEach((key,value){
+    total += value.quantity! * value.price!;
+    });
+    return total;
+  }
     } //checks if the key is inserted in the map
+

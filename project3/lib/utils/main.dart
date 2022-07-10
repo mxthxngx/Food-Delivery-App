@@ -7,7 +7,9 @@ import 'package:project3/pages/cart/cart_page.dart';
 import 'package:project3/pages/food/popular_food_detail.dart';
 import 'package:project3/pages/food/recommended_food.dart';
 import 'package:project3/pages/home/food_page_body.dart';
+import 'package:project3/pages/home/home_page.dart';
 import 'package:project3/pages/home/main_home_page.dart';
+import 'package:project3/pages/splash/splash_page.dart';
 import 'package:project3/routes/route_helper.dart';
 import '../controllers/recommended_product_controller.dart';
 import '../helper/dependencies.dart' as dep;
@@ -25,19 +27,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
+    //Get.find<PopularProductController>().getPopularProductList();
+    //Get.find<RecommendedProductController>().getRecommendedProductList();
 
-    return GetMaterialApp(
+    return GetBuilder<PopularProductController>(builder: (_){
+     return  GetBuilder<RecommendedProductController>(builder: (_){
+      return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+      primarySwatch: Colors.blue,
       ),
-      home: MainFoodPage(),
-      initialRoute: RouteHelper.initial,
+      //home: SplashPage(),
+      initialRoute: RouteHelper.getSplashPage(),
       getPages: RouteHelper.routes,
-    );
+      );
+      });
+    });
   }
 }
 
