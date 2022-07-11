@@ -35,7 +35,7 @@ class CartController extends GetxController{
 
     if(quantity>0){
     _items.putIfAbsent(product.id!, () {
-      print("Adding item to cart" + product.id!.toString() + "\t"+quantity.toString());
+      //print("Adding item to cart" + product.id!.toString() + "\t"+quantity.toString());
 
       return CartModel(
 
@@ -51,7 +51,8 @@ class CartController extends GetxController{
     }
     );
 
-    print("Length of item is ${_items.length}");}
+    //print("Length of item is ${_items.length}");
+    }
     else{
       Get.snackbar("Item Count", "Add atleast one item in the cart!",
           backgroundColor: AppColors.mainColor);

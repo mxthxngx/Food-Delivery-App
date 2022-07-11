@@ -15,7 +15,9 @@ import '../../utils/colors.dart';
 import '../../widgets/app_icon.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  late int pageId;
+  late String page;
+   CartPage({Key? key,required this.pageId, required this.page}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,34 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon:Icons.arrow_back_ios,
-                iconColor:Colors.white,
-                  backgroundColor: AppColors.mainColor,
-                  iconSize: Dimensions.iconSize24,
+                GestureDetector(
+                  onTap:()
+                  {
+
+                    if(page == "recommended")
+                      {
+                        Get.toNamed(RouteHelper.getRecommendedFood(pageId, "cartpage"));
+                      }
+                    else if(page=="popular"){
+                      Get.toNamed(RouteHelper.getPopularFood(pageId, "cartpage"));
+
+                    }
+                    else{
+                      Get.toNamed(RouteHelper.getInitial());
+                    }
+
+
+
+    },
+                  child: AppIcon(icon:Icons.arrow_back_ios,
+                  iconColor:Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    iconSize: Dimensions.iconSize24,
+                  ),
                 ),
                 GestureDetector(
                   onTap:(){
-                    Get.to(()=>MainFoodPage());
+                    Get.toNamed(RouteHelper.getInitial());
                   },
                   child: AppIcon(icon:Icons.home_outlined,
                     iconColor:Colors.white,
@@ -80,13 +102,13 @@ class CartPage extends StatelessWidget {
                                            .popularProductList.indexOf(
                                            _cartList[index].product!);
                                        if(popularIndex>=0){
-                                         Get.toNamed(RouteHelper.getPopularFood(popularIndex));
+                                         Get.toNamed(RouteHelper.getPopularFood(popularIndex,"cartpage"));
                                        }
                                        else{
                                          var recommendedIndex = Get.find<RecommendedProductController>()
                                              .recommendedProductList.indexOf(
                                              _cartList[index].product!);
-                                         Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex));
+                                         Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex,"cartpage"));
 
                                        }
                                      },
