@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project3/controllers/cart_controller.dart';
 import 'package:project3/data/repository/popular_product_repo.dart';
@@ -7,6 +9,7 @@ import 'package:project3/utils/colors.dart';
 
 import '../models/cart_model.dart';
 import '../models/products_model.dart';
+import '../utils/dimensions.dart';
 
 class PopularProductController extends GetxController
 { int _quantity= 0;
@@ -97,7 +100,12 @@ class PopularProductController extends GetxController
       Get.snackbar("Item Count", "Item added",
           colorText: AppColors.mainBlackColor,
           isDismissible: true,
-        showProgressIndicator: true,
+        duration: Duration(seconds: 1),
+        maxWidth: Dimensions.screenWidth/1.3,
+        icon: Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+        ),
         progressIndicatorBackgroundColor: AppColors.mainColor
       );
     });
