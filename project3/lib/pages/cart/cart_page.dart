@@ -225,16 +225,22 @@ class CartPage extends StatelessWidget {
 
                   ),
                 ),
-                Container(
-                    height: Dimensions.height30*3,
-                    padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20, bottom: Dimensions.height20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: AppColors.mainColor,
-                    ),
+                GestureDetector(
+                  onTap: (){
+                    cartController.addToHistory();
+                    print("Tapped inside cart page\n");
+                  },
+                  child: Container(
+                      height: Dimensions.height30*3,
+                      padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20, bottom: Dimensions.height20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.radius20),
+                        color: AppColors.mainColor,
+                      ),
 
 
-                    child: BigText(text: "Proceed to pay", color: Colors.white,)),
+                      child: BigText(text: "Proceed to pay", color: Colors.white,)),
+                ),
 
 
               ],

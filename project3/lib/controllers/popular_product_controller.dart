@@ -28,7 +28,7 @@ class PopularProductController extends GetxController
   Future<void> getPopularProductList() async{
     Response response =  await popularProductRepo.getPopularProductList();//repo returns a response
     if(response.statusCode == 200){
-      print("got product");
+     // print("got product");
       _popularProductList =[];
       _popularProductList.addAll(Product.fromJson(response.body).products); //convert the json file to a model type
       //print(_popularProductList);
@@ -94,20 +94,21 @@ class PopularProductController extends GetxController
       {_cart.addItem(product, _quantity);
       _quantity =0;
       _inCartItems=_cart.getQuantity(product);
-      _cart.items.forEach((key, value) {
-     // print("The id is" + value.id.toString() + "The quantity is " +
-       //   value.quantity.toString());
       Get.snackbar("Item Count", "Item added",
           colorText: AppColors.mainBlackColor,
           isDismissible: true,
-        duration: Duration(seconds: 1),
-        maxWidth: Dimensions.screenWidth/1.3,
-        icon: Icon(
-          Icons.check_circle_outline,
-          color: Colors.green,
-        ),
-        progressIndicatorBackgroundColor: AppColors.mainColor
+          duration: Duration(seconds: 1),
+          maxWidth: Dimensions.screenWidth/1.3,
+          icon: Icon(
+            Icons.check_circle_outline,
+            color: Colors.green,
+          ),
+          progressIndicatorBackgroundColor: AppColors.mainColor
       );
+      _cart.items.forEach((key, value) {
+     // print("The id is" + value.id.toString() + "The quantity is " +
+       //   value.quantity.toString());
+
     });
   /*}else{
        Get.snackbar("Item Count", "Add atleast one item in the cart!",

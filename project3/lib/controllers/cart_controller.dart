@@ -9,6 +9,7 @@ class CartController extends GetxController{
   CartController({required this.cartRepo});
   Map<int, CartModel> _items={};
   Map<int,CartModel> get items=>_items;
+  List<CartModel> storageItems=[]; //only for storage of shared preferences.
   void addItem(ProductModel product, int quantity){
   var totalQuantity = 0;
     if(_items.containsKey(product.id!)){
@@ -106,5 +107,31 @@ update();
     });
     return total;
   }
-    } //checks if the key is inserted in the map
+  List<CartModel> getCartData(){
 
+    setCart = cartRepo.getCartList();
+    return storageItems;
+  }
+  /*
+  Set accepts something
+  get returns something
+   */
+  set setCart(List<CartModel> items){
+    storageItems = items;
+print("Length of cart items \n"+storageItems.length.toString());
+  for(int i = 0; i<storageItems.length;i++){
+    _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+    /*
+    when app starts for the first time, this puts info from storage.
+    */
+  }
+  }
+  void addToHistory(){
+    cartRepo.addToCartHistoryList();
+    clear();
+  }
+  void clear(){
+    _items ={};
+    update();
+  }
+    }

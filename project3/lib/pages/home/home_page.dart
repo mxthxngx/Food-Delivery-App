@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   List pages = [
     MainFoodPage(),
     Container(child: Center(child:Text("Next Page"))),
-     Container(child: Center(child: Text("Next next next Page"))),
+    Container(child: Center(child: Text("Next next next Page"))),
     Container(child: Center(child: Text("Next next next Page"))),
 
   ];

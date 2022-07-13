@@ -44,13 +44,10 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap:(){
-                      if(page == "cartpage"){
-                        Get.toNamed(RouteHelper.getCartPage(pageId,"recommended"));
-                      }
-                     else
+
                        Get.toNamed(RouteHelper.getInitial());
       },
-                    child: AppIcon(icon: Icons.clear)),
+                    child: AppIcon(icon: Icons.arrow_back_ios)),
 
                 //AppIcon(icon: Icons.shopping_cart_outlined)
                 GetBuilder<PopularProductController>(builder: (controller)
@@ -181,8 +178,6 @@ class RecommendedFoodDetail extends StatelessWidget {
                               Icons.favorite,
                         color: AppColors.mainColor,
                             ),
-
-
 
                     ),
                     GestureDetector(
