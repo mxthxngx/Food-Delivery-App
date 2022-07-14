@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project3/pages/home/main_home_page.dart';
 import 'package:project3/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:project3/utils/dimensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,27 +28,28 @@ class _HomePageState extends State<HomePage> {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainGreen,
+        inactiveColorPrimary: CupertinoColors.white,
+
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.archivebox_fill),
         title: ("History"),
-        activeColorPrimary:  AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary:  AppColors.mainGreen,
+        inactiveColorPrimary: CupertinoColors.white,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.shopping_cart),
         title: ("Cart"),
 
-        activeColorPrimary: AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainGreen,
+        inactiveColorPrimary: CupertinoColors.white,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person),
         title: ("Me"),
-        activeColorPrimary: AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainGreen,
+        inactiveColorPrimary: CupertinoColors.white,
       ),
     ];
   }
@@ -75,16 +77,25 @@ class _HomePageState extends State<HomePage> {
   return PersistentTabView(
   context,
   controller: _controller,
+  navBarHeight: Dimensions.height15*5,
   screens: _buildScreens(),
   items: _navBarsItems(),
   confineInSafeArea: true,
-  backgroundColor: Colors.white, // Default is Colors.white.
+  backgroundColor: AppColors.mainColor, // Default is Colors.white.
   handleAndroidBackButtonPress: true, // Default is true.
   resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
   stateManagement: true, // Default is true.
-  hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+  hideNavigationBarWhenKeyboardShows: true,
+    margin: EdgeInsets.only(top: Dimensions.height15*3,left: Dimensions.width15,right:Dimensions.width15,bottom: Dimensions.width15/2),
+// Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
   decoration: NavBarDecoration(
-  borderRadius: BorderRadius.circular(10.0),
+  borderRadius: BorderRadius.only(
+    bottomLeft:Radius.circular(Dimensions.width15*1.5),
+    bottomRight:Radius.circular(Dimensions.width15*1.5),
+    topRight: Radius.circular(Dimensions.width15*1.5),
+    topLeft: Radius.circular(Dimensions.width15*1.5),
+  ),
+
   colorBehindNavBar: Colors.white,
   ),
   popAllScreensOnTapOfSelectedTab: true,

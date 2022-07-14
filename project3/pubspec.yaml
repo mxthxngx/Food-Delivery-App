@@ -92,7 +92,7 @@ flutter:
      - family: Lato
        fonts:
              - asset: assets/fonts/Lato/Lato-Regular.ttf
-               weight: 400
+               weight: 600
      - family: Gentium Book Plus
        fonts:
              - asset: assets/fonts/Gentium_Book_Plus/GentiumBookPlus-Bold.ttf

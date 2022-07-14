@@ -16,19 +16,19 @@ class AppColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BigText(text: text,color: Colors.black,size: Dimensions.font26,),
+        BigText(text: text,color: AppColors.mainColor,size: Dimensions.font26*1.2,),
         SizedBox(height:Dimensions.height10,),
         Row(
           children: [
             Wrap(
-              children: List.generate(5,(index)=>Icon(Icons.star,color: AppColors.mainColor,size:15)),
+              children: List.generate(5,(index)=>Icon(Icons.star,color: AppColors.mainGreen,  size:Dimensions.height20)),
             ),
             const SizedBox(width: 10,),
-            SmallText(text: "4.5",color:Colors.blueGrey,),
+            SmallText(text: "4.5",color:Colors.black45,size: Dimensions.font20/1.3,),
             const SizedBox(width: 10,),
-            SmallText(text: "1287",color:Colors.blueGrey,),
+            SmallText(text: "1287",color:Colors.black45,size: Dimensions.font20/1.3,),
             const SizedBox(width: 10,),
-            SmallText(text: "reviews",color:Colors.blueGrey,)
+            SmallText(text: "reviews",color:Colors.black45,size: Dimensions.font20/1.1,)
           ],
         ),
         SizedBox(height: Dimensions.height20,),
@@ -36,9 +36,9 @@ class AppColumn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: [
-            IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
-            IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: AppColors.mainColor),
-            IconAndText(icon: Icons.access_time, text: "1.75km", iconColor: Colors.red),
+            IconAndText(icon: Icons.energy_savings_leaf, text: "Vegan", iconColor: Colors.greenAccent),
+            IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: Colors.blue),
+            IconAndText(icon: Icons.access_time, text: ".5hrs", iconColor: Colors.teal),
 
           ],
         )

@@ -64,11 +64,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
         }),
     GetBuilder<PopularProductController>(builder: (popularProducts) {
-    return  new DotsIndicator(
+    return  DotsIndicator(
       dotsCount: popularProducts.popularProductList.length<=0?1:popularProducts.popularProductList.length,
       position: _currPageValue,
       decorator: DotsDecorator(
-        activeColor: AppColors.mainColor,
+        color: AppColors.mainColor,
+        activeColor: AppColors.mainGreen,
         size: const Size.square(9.0),
         activeSize: const Size(18.0, 9.0),
         activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -255,6 +256,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
             ),
           child: Container(
+
             padding:  EdgeInsets.only(top: Dimensions.height15,left: Dimensions.width15 ,right: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,17 +276,19 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     SmallText(text: "reviews",color:Colors.blueGrey,)
                   ],
                 ),
-                 SizedBox(height: Dimensions.height20,),
+                 SizedBox(height: Dimensions.height10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                   children: [
-                     IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
-                    IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: AppColors.mainColor),
-                     IconAndText(icon: Icons.access_time, text: "1.75km", iconColor: Colors.red),
+                    IconAndText(icon: Icons.energy_savings_leaf, text: "Vegan", iconColor: Colors.greenAccent),
+                    IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: Colors.blue),
+                    IconAndText(icon: Icons.access_time, text: ".5hrs", iconColor: Colors.teal),
+
 
                   ],
-                )
+                ),
+
 
               ],
             ),

@@ -22,9 +22,9 @@ class BigText extends StatelessWidget {
 
       style: TextStyle(
         color: color,
-        fontFamily: 'San Francisco',
+        fontFamily: 'Lato',
         fontWeight: FontWeight.w600,
-        fontSize: size==0? Dimensions.font20:size,
+        fontSize: size==0?  Dimensions.font20*1.1:size,
       ),
 
     );
