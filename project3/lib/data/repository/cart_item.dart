@@ -15,15 +15,17 @@ class CartRepo
  void addToCartList(List<CartModel> cartList){
   //sharedPreferences.remove(AppConstants.CART_LIST);
   //sharedPreferences.remove(AppConstants.CART_HISTORY);
-
+var time = DateTime.now().toString();
   cart=[];
 
-  cartList.forEach((element)=> {(cart.add(jsonEncode(element))
-  )});
+  cartList.forEach((element) {
+   element.time = time;
+   return cart.add(jsonEncode(element));
+  });
 
   sharedPreferences.setStringList(AppConstants.CART_LIST,cart);
   //print(sharedPreferences.getStringList(AppConstants.CART_LIST));
-  getCartList();
+  //getCartList();
  }
 /*
 The below method is to retrieve the cart list ---- taking a list of strings and converting it into an

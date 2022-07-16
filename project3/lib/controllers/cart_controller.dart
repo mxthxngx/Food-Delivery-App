@@ -134,4 +134,7 @@ print("Length of cart items \n"+storageItems.length.toString());
     _items ={};
     update();
   }
+  List<CartModel> getCartHistoryList(){
+    return cartRepo.getCartHistoryList();
+  }
     }

@@ -96,7 +96,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ),
                 SizedBox(width: Dimensions.width10,),
                 Container(
-                    child: SmallText(text: "Food pairing",color: Colors.black26)
+                    child: SmallText(text: "Food pairing",color: Colors.black26,size: Dimensions.font20,)
                 )
               ],
             )
@@ -159,9 +159,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    IconAndText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.amber),
-                                    IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: AppColors.mainColor),
-                                    IconAndText(icon: Icons.access_time, text: "1.75km", iconColor: Colors.red),
+                                    IconAndText(icon: Icons.energy_savings_leaf, text: "Vegan", iconColor: Colors.greenAccent),
+                                    IconAndText(icon: Icons.location_on, text: "1.75km", iconColor: Colors.blue),
+                                    IconAndText(icon: Icons.access_time, text: ".5hrs", iconColor: Colors.teal),
 
                                   ],
                                 )
