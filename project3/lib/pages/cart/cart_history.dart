@@ -59,7 +59,7 @@ class _CartHistoryState extends State<CartHistory> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 BigText(text: "Cart History",color: Colors.white,),
-                AppIcon(icon:Icons.shopping_cart_outlined,backgroundColor: Colors.grey.shade900,iconColor: AppColors.mainGreen,),
+                AppIcon(icon:Icons.shopping_cart_outlined,backgroundColor: Colors.grey.shade800,iconColor: AppColors.mainGreen,),
               ],
             ),
           ),
@@ -79,7 +79,7 @@ class _CartHistoryState extends State<CartHistory> {
                 child: Column(
                   crossAxisAlignment:CrossAxisAlignment.start ,
                   children: [
-                    BigText(text: "05/02/2022"),
+                    BigText(text: "05|02|2022"),
                     Row(
                       children: [
                         Wrap(

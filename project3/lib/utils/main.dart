@@ -13,11 +13,13 @@ import 'package:project3/pages/home/main_home_page.dart';
 import 'package:project3/pages/splash/splash_page.dart';
 import 'package:project3/routes/route_helper.dart';
 import '../controllers/recommended_product_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../helper/dependencies.dart' as dep;
 import '../pages/home/main_home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await dep.init();
   runApp(const MyApp());
 }

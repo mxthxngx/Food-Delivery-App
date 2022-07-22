@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project3/pages/authenticate/signout.dart';
 import 'package:project3/pages/cart/cart_history.dart';
 import 'package:project3/pages/home/main_home_page.dart';
 import 'package:project3/utils/colors.dart';
@@ -21,7 +22,8 @@ class _HomePageState extends State<HomePage> {
       MainFoodPage(),
       Container(child: Center(child:Text("Next Page"))),
       CartHistory(),
-      Container(child: Center(child: Text("Next next next Page"))),
+      //Container(child: Center(child: Text("Next next next Page"))),
+      Person(),
     ];
   }
   List<PersistentBottomNavBarItem> _navBarsItems() {

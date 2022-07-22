@@ -6,4 +6,6 @@ class AppColors{
   static final Color mainBlackColor = const Color(0xFF1C1D1C);
   static final Color mainGreen = const Color(0xFFCAF70C);
   static final Color buttonColor =  const Color(0xFFCAF70C);
+  static final Color darkGrey = const Color(0xFF48484);
+  static final Color lightGrey = const Color(0xFFC0C0C0);
 }
